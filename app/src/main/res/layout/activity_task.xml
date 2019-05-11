@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewModel" type="com.example.taskplanner.TaskViewModel" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TaskActivity">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/custombackground"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:titleTextColor="#000000"
+                app:title="Новое задание"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        </android.support.design.widget.AppBarLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:padding="16dp"
+            >
+            <TableRow>
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text="Название"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.name}" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text="Описание"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:text="@={viewModel.description}" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text="Дата"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="13dp"/>
+
+                <RelativeLayout
+                    android:layout_weight="2">
+                    <EditText
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:hint="dd/mm/yyyy"
+                        android:text="@={viewModel.dateText}" />
+
+                    <ImageButton
+                        android:id="@+id/datePickerOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/ic_baseline_date_range_24px"
+                        android:clickable="true"
+                        android:onClick="setDate" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginTop="14dp">
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text="Важность"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:id="@+id/typeRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:backgroundTint="@color/colorButton">
+
+                    <RadioButton
+                        android:id="@+id/urgentRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Срочное"
+                        android:textColorLink="@color/colorButton"
+                        android:checked="@={viewModel.isUrgentTask}" />
+
+                    <RadioButton
+                        android:id="@+id/normalRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Обычное"
+                        android:textColorLink="@color/colorButton"
+                        android:checked="@={viewModel.isNormalTask}" />
+
+                    <RadioButton
+                        android:id="@+id/optionalRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Необязательное"
+                        android:textColorLink="@color/colorButton"
+                        android:checked="@={viewModel.isOptionalTask}"/>
+                </RadioGroup>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text="Вложение"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="52dp"
+                            android:minWidth="52dp"
+                            android:background="@drawable/ic_baseline_add_photo_alternate_24px"
+                            android:clickable="true"
+                            android:onClick="selectPhoto" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_baseline_add_a_photo_24px"
+                            android:clickable="true"
+                            android:minWidth="46dp"
+                            android:minHeight="40dp"
+                            android:onClick="takePhoto"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="2dp"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_marginTop="4dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@{viewModel.photoUri}" >
+
+                    </ImageView>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorButton"
+                android:clickable="true"
+                android:onClick="cancel"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Отменить" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorButton"
+                android:clickable="true"
+                android:onClick="save"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Сохранить" />
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+       <android.support.v7.widget.Toolbar
+           android:id="@+id/my_toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"
+           android:background="@drawable/custombackground"
+           android:elevation="4dp"
+           android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+           app:titleTextColor="#000000"
+           app:title="Список дел"
+           app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <ListView
+        android:id="@+id/listTasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:clickable="true"
+        >
+    </ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:src="@drawable/ic_baseline_add_24px"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/colorButton"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:rippleColor="@color/colorPrimaryDark"
+        android:onClick="addNewTask">
+    </android.support.design.widget.FloatingActionButton>
+
+</android.support.design.widget.CoordinatorLayout>
